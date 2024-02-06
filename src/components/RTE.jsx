@@ -1,6 +1,6 @@
 import React from 'react'
-import {Editor } from '@tinymce/tinymce-react'
-import { Controller } from 'react-hook-form'
+import {Editor } from '@tinymce/tinymce-react';
+import {Controller } from 'react-hook-form';
 
 
 //Rich Test Editor 
@@ -11,23 +11,25 @@ label: An optional label for editor
 defaultValue: defaultValue for the editor
 
 */
-export default function RTE ({name , control , label , defaultValue = ""} ) {
-  return (
+export default function RTE({name, control, label, defaultValue =""}) {
+    return (
+      <div className='w-full'> 
+      {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
 
-    <div className='w-full'> 
-    {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
-
-//CONTROLLER component from react-hook-form used to integrate Yinymce editor into the form
+{/*  Controller component from react-hook-form used to integrate Yinymce editor into the form */}
+    
     <Controller
     name={name || "content"}
     control={control} //pass controller component for managing form state
     render={({field: {onChange}}) => (
         // Editor component from Tinymce to render tinymce editor
         <Editor
+        apiKey='l6us4hdi17elwnrade33rllzqv15ynw432o2eo5h73g461h3'
         initialValue={defaultValue}
         //init configuration option for Tinymce , plugins, toolbar options and content Styles
         init={{
             initialValue: defaultValue,
+            brand: false,
             height: 500,
             menubar: true,
             plugins: [
@@ -59,7 +61,7 @@ export default function RTE ({name , control , label , defaultValue = ""} ) {
         onEditorChange={onChange}
         />
         /*
-        he onChange method in the line
+        the onChange method in the line
         render={({field: {onChange}}) => 
         ( is a part of the field object provided 
         by react-hook-form. 

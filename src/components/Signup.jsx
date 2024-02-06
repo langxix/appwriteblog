@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import  authService  from "../appwrite/auth"
+import { login } from "../store/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { authService } from "../appwrite/auth";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Button, Input, Logo } from "./index";
-import { login } from "../store/authSlice";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Signup() {
       const userData = await authService.createAccount(data);
       if (userData) {
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(loginuser(userData));
+        if (userData) dispatch(login(userData));
         navigate("/");
       }
     } catch (error) {
@@ -39,8 +39,9 @@ function Signup() {
         <h2 className="text-center text-2xl font-bold leading-tight">
           Sign up to create account
         </h2>
+        
         <p className="mt-2 text-center text-base text-black/60">
-          Already have an account?&nbsp; // special character in HTML used to create a space that will not break into a new line.
+          Already have an account?&nbsp;
 
           <Link
             to="/login"
@@ -81,7 +82,7 @@ function Signup() {
                 required: true,
               })}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" bgColor="bg-blue-600" textColor="black"  >
               Create Account
             </Button>
           </div>

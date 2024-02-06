@@ -5,10 +5,16 @@ import './index.css';
 import { Provider } from 'react-redux';
 import store from './store/store.js';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import AllPosts from './Pages/AllPosts.jsx';
-import AddPost from './Pages/AddPost.jsx';
-import EditPost from './Pages/EditPost.jsx';
 
+import {AuthLayout,Login} from './components/index.js' 
+
+//pages
+import Home from './Pages/Home.jsx'
+import AddPost from './Pages/AddPost.jsx';
+import  Signup  from './Pages/Signup.jsx';
+import EditPost from './Pages/EditPost.jsx';
+import Post from './Pages/Post.jsx'
+import AllPosts from './Pages/AllPosts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,48 +29,48 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
-          <AuthLayoyt authentication = {false}>
+          <AuthLayout authentication = {false}>
             <Login />
-          </AuthLayoyt>
+          </AuthLayout>
         )
       },
       {
         path: '/signup',
         element: (
-          <AuthLayoyt authentication = {false}>
+          <AuthLayout authentication = {false}>
             <Signup />
-          </AuthLayoyt>
+          </AuthLayout>
         )
       },
       {
         path: '/all-posts',
         element: (
-          <AuthLayoyt authentication >
+          <AuthLayout authentication >
             {" "}
             <AllPosts />
-          </AuthLayoyt>
+          </AuthLayout>
         )
       },
       {
         path: '/add-post',
         element: (
-          <AuthLayoyt authentication >
+          <AuthLayout authentication >
             {""}
             <AddPost />
-          </AuthLayoyt>
+          </AuthLayout>
         )
       },
       {
         path: '/edit-post/:slug',
         element: (
-          <AuthLayoyt authentication >
+          <AuthLayout authentication >
             {""}
             <EditPost />
-          </AuthLayoyt>
+          </AuthLayout>
         )
       },
       {
-        path: '/post',
+        path: '/post/:slug',
         element: <Post />
       },
     ],
