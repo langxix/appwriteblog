@@ -1,85 +1,120 @@
-import React  , {useState} from 'react'
-import {Link , useNavigate } from "react-router-dom"
-import { login as authLogin } from "../store/authSlice"
-import {Button , Input , Logo} from "./index"
-import { useSelector, useDispatch } from 'react-redux'
-import authService from '../appwrite/auth'
-import {useForm} from "react-hook-form"
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login as authLogin } from "../store/authSlice";
+import { Button, Input } from "./index";
+import { useSelector, useDispatch } from "react-redux";
+import authService from "../appwrite/auth";
+import { useForm } from "react-hook-form";
+import { ArrowRight } from "lucide-react";
 
-function Login(){
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {register , handleSubmit} = useForm()
-    const [error , setError] = useState("")
+function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { register, handleSubmit } = useForm();
+  const [error, setError] = useState("");
 
-    const login = async(data) => {
-        setError("")
-        try {
-           const session =  await authService.login(data)
-           if (session){
-            const userData = await authService.
-            getCurrentUser()
-            if(userData) dispatch(authLogin(userData))
-            navigate("/")
-           }
-        } catch (error) {
-            setError(error.message)
-        }
+  const login = async (data) => {
+    setError("");
+    try {
+      const session = await authService.login(data);
+      if (session) {
+        const userData = await authService.getCurrentUser();
+        if (userData) dispatch(authLogin(userData));
+        navigate("/");
+      }
+    } catch (error) {
+      setError(error.message);
     }
+  };
 
-    return (
-        <div
-        className='flex items-center justify-center w-full'
-        >
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
-            <div className="mb-2 flex justify-center">
-                        <span className="inline-block w-full max-w-[100px]">
-                            <Logo width="100%" />
-                        </span>
-            </div>
-            <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
-            <p className="mt-2 text-center text-base text-black/60">
-                        Don&apos;t have any account?&nbsp;
-                        <Link
-                            to="/signup"
-                            className="font-medium text-primary transition-all duration-200 hover:underline"
-                        >
-                            Sign Up
-                        </Link>
+  return (
+    <section>
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
+          <div class="absolute inset-0">
+            <img
+              class="h-full w-full rounded-md object-cover object-top"
+              src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTk0fHxkZXNpZ25lcnxlbnwwfHwwfHw%3D&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+          <div class="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+            <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl">
+              Sign in
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+              Don&#x27;t have an account?{" "}
+              <Link
+                to="/signup"
+                class="font-semibold text-black transition-all duration-200 hover:underline"
+              >
+                Create a free account
+              </Link>
             </p>
             {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-            <form onSubmit={handleSubmit(login)} className='mt-8'>
-                <div className='space-y-5'>
-                    <Input
+            <form onSubmit={handleSubmit(login)} className="mt-8">
+              <div class="space-y-5">
+                <div>
+                  <Input
                     label="Email: "
                     placeholder="Enter your email"
                     type="email"
                     {...register("email", {
-                        required: true,
-                        validate: {
-                            matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.
-                             test(value) ||
-                            "Email address must be a valid address",
-                        }
+                      required: true,
+                      validate: {
+                        matchPatern: (value) =>
+                          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+                            value
+                          ) || "Email address must be a valid address",
+                      },
                     })}
-                    />
+                  />
+                  <div class="mt-2">
                     <Input
-                    label="Password: "
-                    type="password"
-                    placeholder="Enter your password"
-                    {...register("password", {
+                      label="Password: "
+                      type="password"
+                      placeholder="Enter your password"
+                      {...register("password", {
                         required: true,
-                    })}
+                      })}
                     />
-                    <Button
-                    type="submit"
-                    className="w-full"
-                    >Sign in</Button>
+                  </div>
                 </div>
+                <div>
+                  <div class="mt-2"></div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    class="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                  >
+                    Get started{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="ml-2"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </form>
-            </div>
+          </div>
         </div>
-  )
+      </div>
+    </section>
+  );
 }
 
-export default Login
+export default Login;

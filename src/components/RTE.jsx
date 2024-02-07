@@ -29,7 +29,6 @@ export default function RTE({name, control, label, defaultValue =""}) {
         //init configuration option for Tinymce , plugins, toolbar options and content Styles
         init={{
             initialValue: defaultValue,
-            brand: false,
             height: 500,
             menubar: true,
             plugins: [

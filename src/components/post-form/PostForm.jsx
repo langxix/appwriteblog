@@ -113,7 +113,7 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" className={`w-full ${post ? 'bg-green-500 hover:bg-green-300' : 'bg-blue-500'} hover:bg-blue-300 px-6 py-2 duration-200 rounded-full`}>
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

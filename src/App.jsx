@@ -23,11 +23,12 @@ function App() {
   }, [])
   
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <div className='min-h-screen flex flex-wrap content-between bg-white w-full'>
       <div className='w-full block'>
         <Header />
         <main>
-        POSTS:  <Outlet />
+        <h1 className=" mt-4 inline-block rounded-full bg-gray-50 px-3 py-1 text-lg font-semibold text-black"> POSTS </h1> 
+         <Outlet />
         </main>
         <Footer />
       </div>

@@ -19,11 +19,7 @@ const Header = () => {
       slug: "/login",
       active: !authStatus
     },
-    {
-      name: "Signup",
-      slug: "/signup",
-      active: !authStatus
-    },
+    ,
     {
       name: "All Posts",
       slug: "/all-posts",
@@ -38,22 +34,23 @@ const Header = () => {
 
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className=' top-0 border-b-4 bg-white w-full'>
       <Container>
-        <nav className='flex'>
-          <div className='mr-4'>
+        <nav className='flex items-center pb-5'>
+          <div className=''>
             <Link to = '/'>
-            <Logo width='70px' />
+            <Logo />
             </Link>
           </div>
-          <ul className='flex ml-auto'>
+          <ul className='inline-flex ml-auto'>
             {navItems.map((item) => 
             item.active ? (
               <li key={item.name}>
                 <button
-                className='inline-block px-6 py-2
-                duration-200 hover:bg-blue-100 rounded-full'
-                onClick={() => navigate(item.slug)}
+                className={`inline-block font-semibold px-6 py-2
+                duration-200 rounded-full 
+                ${item.name === "Login" ?  'text-white bg-blue-500 hover:bg-blue-600' : 'text-gray-800 hover:bg-blue-100'}`}
+                 onClick={() => navigate(item.slug)}
                 >{item.name}</button>
               </li>
             ) : null
@@ -62,7 +59,7 @@ const Header = () => {
               <li>
                 <LogoutBtn />
               </li>
-            )}
+            ) }
           </ul>
         </nav>
       </Container>
